@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="homepage/style1.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+    <title>URL Shortener</title>
+</head>
+<body>
+    <!-- <div id="home-page"> -->
+
+        <div id="main-heading"><h1>URL Shortener</h1></div>
+        <div id="full-page" >
+            <div id="non-premium-section" >
+                <h1 id="non-premium-heading">Free tier</h1>
+                <!-- <h2>Enter your URL :</h2> 
+                <form action="/nonpremiumurl" method="post">
+                    <label for="url">Url</label> 
+                    <input type="url" name="urldata" id="">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form> -->
+                <form class="forms" action="/nonpremiumurl" method="post">
+                    <div class="form-group">
+                      <label for="email">Enter your URL :</label>
+                      <input type="url" class="form-control" name="urldata" id="url" placeholder="Enter your link here">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Shorten</button>
+                </form>
+            </div>
+            <div id="premium-section">
+                <h1 id="premium-heading">Premium User</h1>
+                <form class="forms" action='/nonpremiumOTPverify' method="post">
+                    <div class="form-group">
+                        <label for="email">Enter your Email :</label>
+                        <input class="inpemail form-control"type="email" name="email" id="premium-section-input" placeholder="Enter your email...">
+                    </div>
+
+                    <div class="otpdiv advancedHide">
+                        <!-- <label for="email">Temp storing Email</label>
+                        <input class="inpemail1"type="email" name="email" id=""> -->
+                        <!-- <form> -->
+                            <label for="otp">Enter OTP</label><br/>
+                            <input type="number" name="otp" id="premium-section-input"><br/>
+                            <button class="btn btn-primary" type="submit">Submit OTP</button>
+                        <!-- </form> -->
+                    </div>
+                    <button id="btnforemail" class="btn btn-primary " type="button">Submit Email</button>
+
+                    
+                </form>
+            </div>
+        </div>
+        <div id="graph">
+            <canvas id="myChart" style="width:100%;"></canvas>
+        </div>
+    <!-- </div> -->
+
+    <script src="homepage/index1.js"></script>
+    <script>
+
+        let graphData = '<%-graphData%>';
+        graphData = JSON.parse(graphData);
+
+        let curr_date = [] , read_count = [] , write_count = [];
+        for(let i = 0; i < Math.min(graphData.length , 15) ; i++)
+        {
+            curr_date.push(graphData[i].curr_date);
+            read_count.push(graphData[i].readcount);
+            write_count.push(graphData[i].writecount);
+        }
+
+
+        var data = {
+        labels: curr_date,
+        datasets: [
+            {
+            label: "Read",
+            backgroundColor: "#0092ca",
+            data: read_count,
+            },
+            {
+            label: "Write",
+            backgroundColor: "#ff4057",
+            data: write_count,
+            },
+        ],
+        };
+
+        new Chart("myChart", {
+        type: "bar",
+        data,
+        options: {
+            legend: { display: true },
+            title: {
+            display: true,
+            text: "Read and Write in past 15 days",
+            },
+            barValueSpacing: 50,
+            scales: {
+            yAxes: [
+                {
+                ticks: {
+                    beginAtZero: true,
+                },
+                },
+            ],
+            },
+        },
+        });
+    </script>
+</body>
+</html>
+
+<!-- <h2>Email Premium</h2>  -->
+<!-- <form action="" method=""> -->
+<!-- <label for="email">Email</label> -->
+    
