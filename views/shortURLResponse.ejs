@@ -13,14 +13,15 @@
     <div id="main-content">
         <h2>Here is your short url :</h2>
         <div id="text-area">
-            <a id="shorturl" href="http://ec2-54-173-198-224.compute-1.amazonaws.com:8000/<%= shorturl%>">http://ec2-54-173-198-224.compute-1.amazonaws.com:8000/<%= shorturl%></a>
+            <a id="shorturl" href="http://Mysqlfrontend-env.eba-hr9zhnvk.ap-south-1.elasticbeanstalk.com/<%= shorturl%>">http://Mysqlfrontend-env.eba-hr9zhnvk.ap-south-1.elasticbeanstalk.com/<%= shorturl%></a>
             <button class="btn btn-primary" onclick="copytoclipboard()">Copy to clipboard</button>
         </div>
         <!-- <a href="https://google.com">https://google.com</a> -->
     </div>
     <script>
         function copytoclipboard()
-        {
+        {   
+            console.log("COpy Done");
             let shortUrl = document.getElementById('shorturl').innerHTML;
             // console.log(shortUrl);
             navigator.clipboard.writeText(shortUrl);
